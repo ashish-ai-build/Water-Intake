@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Liquid Glass Water Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>Stay Hydrated</h1>
+            <p class="goal-text">Daily Goal: 6000ml</p>
+        </header>
+
+        <div class="blob-wrapper">
+            <div class="glass-blob">
+                <!-- Deep water layers -->
+                <div class="water" style="top: 100%"></div>
+                <div class="water" style="top: 100%"></div>
+                <div class="water" style="top: 100%"></div>
+
+                <!-- Display content in the center of the blob -->
+                <div class="intake-display">
+                    <span id="current-intake">0</span><span class="unit">ml</span>
+                </div>
+
+                <!-- Front-facing glassy reflection overlay -->
+                <div class="glass-reflection"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="glass-btn btn-add" id="btn-add">
+                <span class="btn-icon">💧</span> Add +500ml
+            </button>
+            <button class="glass-btn btn-reset" id="btn-reset">Reset</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
