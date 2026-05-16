@@ -7,6 +7,33 @@ const DAILY_GOAL = 6000;
 let currentIntake = 0;
 let lastIntake = 0;
 
+// Load from local storage
+const savedData = localStorage.getItem('waterTrackerData');
+if (savedData) {
+    try {
+        const data = JSON.parse(savedData);
+        const today = new Date().toDateString();
+        
+        // Only load if it's the same day, otherwise it resets for the new day
+        if (data.date === today) {
+            currentIntake = data.intake;
+            lastIntake = currentIntake;
+        } else {
+            localStorage.removeItem('waterTrackerData');
+        }
+    } catch (e) {
+        console.error("Error loading data", e);
+    }
+}
+
+function saveData() {
+    const data = {
+        intake: currentIntake,
+        date: new Date().toDateString()
+    };
+    localStorage.setItem('waterTrackerData', JSON.stringify(data));
+}
+
 function animateValue(obj, start, end, duration) {
     let startTimestamp = null;
     const step = (timestamp) => {
@@ -43,6 +70,7 @@ function updateUI(animate = true) {
 
 function addWater(amount) {
     currentIntake += amount;
+    saveData();
     // Add a tiny bump animation to the container for tactile feedback
     const blob = document.querySelector('.glass-blob');
     blob.style.transform = 'scale(1.05)';
@@ -55,6 +83,7 @@ function addWater(amount) {
 
 function resetWater() {
     currentIntake = 0;
+    saveData();
     updateUI();
 }
 
